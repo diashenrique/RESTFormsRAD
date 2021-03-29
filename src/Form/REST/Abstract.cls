@@ -13,6 +13,8 @@ Parameter UseSession As Integer = 1;
 
 Parameter CONVERTINPUTSTREAM = 0;
 
+Parameter HandleCorsRequest = 1;
+
 /// This method takes a status, renders it as json (if requested) and outputs the result
 ClassMethod outputStatus(pSC As %Status) As %Status [ Internal ]
 {
@@ -136,4 +138,3 @@ ClassMethod checkObjPermission(class As %String, action As %String(VALUELIST="C,
 }
 
 }
-

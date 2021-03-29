@@ -48,7 +48,7 @@ ClassMethod determineClassCategory(className As %String = "") As %String
 /// collection - is a collection (list, array)
 /// displayName - displayname parameter value
 /// required - is it required (0/1)
-ClassMethod addClassProperty(className As %String = "", name As %String, type As %String = "%String", collection As %String(VALUELIST=",list,array") = "", displayName As %String = "", required As %Boolean = {$$$NO}) As %Status
+ClassMethod addClassProperty(className As %String = "", name As %String, type As %String = "%String", collection As %String(VALUELIST=",list,array") = "", displayName As %String = "", required As %Boolean = {$$$NO}, jsonInclude As %String = "", jsonReference As %String = "") As %Status
 {
 	#dim sc As %Status = $$$OK
 	if (##class(%Dictionary.PropertyDefinition).IDKEYExists(className, name)) {
@@ -63,8 +63,18 @@ ClassMethod addClassProperty(className As %String = "", name As %String, type As
 	set property.Type = type
 	set property.Collection = collection
 	set property.Required = required
-	if (($get(displayName)'="") && ($$$comClassKeyGet(className,$$$cCLASSpropertyclass)[$$$propClass)) {
+	set property.SequenceNumber = class.Properties.Count() + 1
+	//if (($get(displayName)'="") && ($$$comClassKeyGet(className,$$$cCLASSpropertyclass)[$$$propClass)) {
+	if ($get(displayName)'="") {
 		set sc = property.Parameters.SetAt(displayName, $$$propDisplayNameParam)
+		return:$$$ISERR(sc) sc
+	}
+	if ($get(jsonInclude)'="") {
+		set sc = property.Parameters.SetAt(jsonInclude, "%JSONINCLUDE")
+		return:$$$ISERR(sc) sc
+	}
+	if ($get(jsonReference)'="") {
+		set sc = property.Parameters.SetAt(jsonReference, "%JSONREFERENCE")
 		return:$$$ISERR(sc) sc
 	}
 	
@@ -94,7 +104,8 @@ ClassMethod modifyClassProperty(className As %String = "", name As %String, type
 	set property.Type = type
 	set property.Collection = collection
 	set property.Required = required
-	if (($get(displayName)'="") && ($$$comClassKeyGet(className,$$$cCLASSpropertyclass)=$$$propClass)) {
+	//if (($get(displayName)'="") && ($$$comClassKeyGet(className,$$$cCLASSpropertyclass)=$$$propClass)) {
+		if ($get(displayName)'="") {
 		set sc = property.Parameters.SetAt(displayName, $$$propDisplayNameParam)
 		return:$$$ISERR(sc) sc
 	}
@@ -163,4 +174,3 @@ $$$comMemberKeyGet(className, $$$cCLASSproperty, name, $$$cPROPsqlfieldname)
 }
 
 }
-

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
-  <Document name="restforms2.ZPM">
+  <Document name="restformsrad.ZPM">
     <Module>
-      <Name>restforms2</Name>
-      <Version>1.0.8</Version>
+      <Name>RESTFormsRAD</Name>
+      <Description>Forms adapter for InterSystems IRIS RAD Studio</Description>
+      <Version>1.0.0</Version>
+      <Keywords>rad,rest,api,json,adapter</Keywords>
       <Packaging>module</Packaging>
       <SourcesRoot>src</SourcesRoot>
       <Resource Name="Form.PKG"/>

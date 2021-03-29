@@ -27,7 +27,7 @@ ClassMethod createFormField(class As %String = "") As %Status
 	set sc = ##class(Form.Info).formExistsStatus(class)
 	return:$$$ISERR(sc) sc
 	
-	set obj = %request.Content
+	set obj = {}.%FromJSON(%request.Content)
 	 
 	set name = obj.name
 	set type = obj.type
@@ -56,7 +56,7 @@ ClassMethod updateFormField(class As %String = "") As %Status
 	set sc = ##class(Form.Info).formExistsStatus(class)
 	return:$$$ISERR(sc) sc
 	
-	set obj = %request.Content
+	set obj = {}.%FromJSON(%request.Content)
 	 
 	set name = obj.name
 	set type = obj.type
@@ -81,4 +81,3 @@ ClassMethod deleteFormField(class As %String = "", property As %String = "") As 
 }
 
 }
-
