@@ -1,6 +1,8 @@
-# RESTForms
+# RESTFormsRAD
+
 RESTForms is a generalized REST API backend for web applications built on InterSystems (Caché or Ensemble) backend.
 
+RESTFormsRAD takes advantage of all features provided by RESTForms, but with a few modifications to attend to the RAD Studio needs.
 # Development installation
 
 This is a development version.
