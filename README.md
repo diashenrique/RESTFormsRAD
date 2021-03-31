@@ -31,7 +31,7 @@ This is a development version.
 
 # Installation
 ## With ZPM
-ZPM:User>install restforms2
+ZPM:User>install restformsrad
 
 ## Manually
 1. Import latest [release](https://github.com/intersystems-community/RESTForms2/releases).
