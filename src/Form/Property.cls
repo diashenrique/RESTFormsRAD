@@ -41,6 +41,7 @@ ClassMethod determineClassCategory(className As %String = "") As %String
 	return $$$getClassType(className)
 }
 
+/// todo: change such several parameters for a DTO
 /// Add class property
 /// className - class
 /// name - property name
@@ -48,7 +49,28 @@ ClassMethod determineClassCategory(className As %String = "") As %String
 /// collection - is a collection (list, array)
 /// displayName - displayname parameter value
 /// required - is it required (0/1)
-ClassMethod addClassProperty(className As %String = "", name As %String, type As %String = "%String", collection As %String(VALUELIST=",list,array") = "", displayName As %String = "", required As %Boolean = {$$$NO}, jsonInclude As %String = "", jsonReference As %String = "") As %Status
+/// relationship - is it a relationship (0/1)
+/// cardinality - if it's a relationship, defines it cardinality (one/many)
+/// inverse - if it's a relationship, defines it class name inverse on relation
+ClassMethod addClassProperty(className As %String = "", name As %String, type As %String = "%String", collection As %String(VALUELIST=",list,array") = "", displayName As %String = "", required As %Boolean = {$$$NO}, jsonInclude As %String = "", jsonReference As %String = "", relationship As %Boolean = 0, cardinality As %String = "", inverse As %String = "") As %Status
+{
+	#dim sc As %Status = $$$OK
+	$$$TOE(sc, ..addClassPropertyNoCompile(className, name, type, collection, displayName, required, jsonInclude, jsonReference))
+	return ..compileClass(className)
+}
+
+/// todo: change such several parameters for a DTO
+/// Add class property without compling it
+/// className - class
+/// name - property name
+/// type - property type
+/// collection - is a collection (list, array)
+/// displayName - displayname parameter value
+/// required - is it required (0/1)
+/// relationship - is it a relationship (0/1)
+/// cardinality - if it's a relationship, defines it cardinality (one/many)
+/// inverse - if it's a relationship, defines it class name inverse on relation
+ClassMethod addClassPropertyNoCompile(className As %String = "", name As %String, type As %String = "%String", collection As %String(VALUELIST=",list,array") = "", displayName As %String = "", required As %Boolean = {$$$NO}, jsonInclude As %String = "", jsonReference As %String = "", relationship As %Boolean = 0, cardinality As %String = "", inverse As %String = "") As %Status
 {
 	#dim sc As %Status = $$$OK
 	if (##class(%Dictionary.PropertyDefinition).IDKEYExists(className, name)) {
@@ -64,6 +86,9 @@ ClassMethod addClassProperty(className As %String = "", name As %String, type As
 	set property.Collection = collection
 	set property.Required = required
 	set property.SequenceNumber = class.Properties.Count() + 1
+	set property.Relationship = relationship
+	set property.Cardinality = cardinality
+	set property.Inverse = inverse
 	//if (($get(displayName)'="") && ($$$comClassKeyGet(className,$$$cCLASSpropertyclass)[$$$propClass)) {
 	if ($get(displayName)'="") {
 		set sc = property.Parameters.SetAt(displayName, $$$propDisplayNameParam)
@@ -84,8 +109,8 @@ ClassMethod addClassProperty(className As %String = "", name As %String, type As
 	set sc = class.%Save()
 	return:$$$ISERR(sc) sc
 	
-	kill class	
-	return ..compileClass(className)
+	kill class
+	Return sc
 }
 
 /// Modify class property
