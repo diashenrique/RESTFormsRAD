@@ -4,7 +4,7 @@
     <Module>
       <Name>RESTFormsRAD</Name>
       <Description>Forms adapter for InterSystems IRIS RAD Studio</Description>
-      <Version>1.1.0</Version>
+      <Version>1.1.1</Version>
       <Keywords>rad,rest,api,json,adapter</Keywords>
       <Packaging>module</Packaging>
       <SourcesRoot>src</SourcesRoot>
