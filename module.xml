@@ -4,11 +4,22 @@
     <Module>
       <Name>RESTFormsRAD</Name>
       <Description>Forms adapter for InterSystems IRIS RAD Studio</Description>
-      <Version>1.0.0</Version>
+      <Version>1.1.0</Version>
       <Keywords>rad,rest,api,json,adapter</Keywords>
       <Packaging>module</Packaging>
       <SourcesRoot>src</SourcesRoot>
-      <Resource Name="Form.PKG"/>
+      <Resource Name="Form.JSON.PKG"/>
+      <Resource Name="Form.REST.PKG"/>
+      <Resource Name="Form.Util.PKG"/>
+      <Resource Name="Form.Adaptor.CLS"/>
+      <Resource Name="Form.Field.CLS"/>
+      <Resource Name="Form.File.CLS"/>
+      <Resource Name="Form.Generators.CLS"/>
+      <Resource Name="Form.Info.CLS"/>
+      <Resource Name="Form.Installer.CLS"/>
+      <Resource Name="Form.Property.CLS"/>
+      <Resource Name="Form.Security.CLS"/>
+      <Resource Name="Form.Settings.CLS"/>
       <Resource Name="Form.inc"/>
       <CSPApplication 
         Url="/forms"
