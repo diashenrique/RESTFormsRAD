@@ -1,6 +1,7 @@
 # RESTForms2 development Docker image
 ARG IMAGE=store/intersystems/iris-community:2019.3.0.309.0
 ARG IMAGE=store/intersystems/iris-community:2019.4.0.379.0
+ARG IMAGE=store/intersystems/iris-community
 FROM $IMAGE
 
 USER root
